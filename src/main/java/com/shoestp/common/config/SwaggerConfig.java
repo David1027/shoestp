@@ -1,7 +1,6 @@
-package com.shoestp.demo.config;
+package com.shoestp.common.config;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,13 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -52,34 +48,10 @@ public class SwaggerConfig {
         boolean isEnable = environment.acceptsProfiles(profiles);
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.shoestp.demo"))
+                .apis(RequestHandlerSelectors.basePackage("com.shoestp"))
                 .paths(PathSelectors.any()).build()
                 .ignoredParameterTypes(HttpSession.class)
                 .enable(isEnable);
-    }
-
-    @Bean
-    public Docket docketHome() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-                .groupName("商城端")
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.shoestp.demo.controller.home")).build();
-    }
-
-    @Bean
-    public Docket docketSeller() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-                .groupName("商家端")
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.shoestp.demo.controller.seller")).build();
-    }
-
-    @Bean
-    public Docket docketPlat() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-                .groupName("平台端")
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.shoestp.demo.controller.plat")).build();
     }
 
 
