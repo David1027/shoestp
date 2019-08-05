@@ -1,6 +1,7 @@
 package com.shoestp.test.entity;
 
 import javax.persistence.*;
+
 import lombok.Data;
 
 /**
@@ -13,13 +14,20 @@ import lombok.Data;
 @Table(name = "test")
 @Data
 public class Test {
-        
+
     @Id
     @GeneratedValue
-        /**id */    @Column(name="id")
+    /**id */
+    @Column(name = "id")
     private Integer id;
-        /**名称 */    @Column(name="name")
+    /**
+     * 名称
+     */
+    @Column(name = "name")
     private String name;
-        /**性别 */    @Column(name="gender")
+    /**
+     * 性别
+     */
+    @Column(name = "gender")
     private String gender;
 }

@@ -18,7 +18,7 @@ public interface TestService {
      * @param id 主键
      * @return 实例对象
      */
-    TestView getById(Integer id);
+    TestView getById(Integer id) throws Exception;
 
     /**
      * 多条件分页查询所有数据

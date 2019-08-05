@@ -3,6 +3,7 @@ package com.shoestp.test.vo.mapper;
 
 import com.shoestp.test.entity.Test;
 import com.shoestp.test.vo.TestView;
+
 import org.modelmapper.ModelMapper;
 
 /**
@@ -13,14 +14,12 @@ import org.modelmapper.ModelMapper;
  */
 public class TestMapper {
 
-    private TestMapper() {}
-    
-    private static ModelMapper modelMapper = null;
-    
+    private ModelMapper modelMapper = null;
+
     /**
      * DO转为DTO
      */
-    private static void typeMapperDOToDTO() {
+    private void typeMapperDOToDTO() {
         modelMapper.createTypeMap(Test.class, TestView.class).addMappings(mapper ->
                 mapper.map(Test::getId, TestView::setId));
     }
@@ -28,7 +27,7 @@ public class TestMapper {
     /**
      * DTO转为DO
      */
-    private static void typeMapperDTOToDO() {
+    private void typeMapperDTOToDO() {
         modelMapper.createTypeMap(TestView.class, Test.class).addMappings(mapper ->
                 mapper.map(TestView::getId, Test::setId));
     }
@@ -39,7 +38,7 @@ public class TestMapper {
      * @param flag 布尔值 true：DO->DTO，false：DTO->DO
      * @return ModelMapper对象
      */
-    public static ModelMapper modelMapperConfig(Boolean flag) {
+    public ModelMapper modelMapperConfig(Boolean flag) {
         modelMapper = new ModelMapper();
         if (flag) {
             typeMapperDOToDTO();

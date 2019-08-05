@@ -1,6 +1,9 @@
 package com.shoestp.test.service.impl;
 
 
+import com.shoestp.common.enums.ResultEnum;
+import com.shoestp.common.exception.WebMessageException;
+import com.shoestp.common.pojo.Result;
 import com.shoestp.test.dao.TestDao;
 import com.shoestp.test.entity.Test;
 import com.shoestp.test.vo.TestView;
@@ -27,6 +30,7 @@ import org.springframework.stereotype.Service;
 public class TestServiceImpl implements TestService {
     @Autowired
     private TestDao testDao;
+    private TestMapper testMapper = new TestMapper();
 
     /**
      * 通过ID查询单条数据
@@ -36,8 +40,10 @@ public class TestServiceImpl implements TestService {
      */
     @Override
     public TestView getById(Integer id) {
-        return TestMapper.modelMapperConfig(true).map(testDao
-                .getTest(id), TestView.class);
+        if (null == testDao.getTest(id)) {
+            throw new WebMessageException(ResultEnum.FAILED.getCode(), "这个[ " + id + " ]id对应的查询结果不存在");
+        }
+        return testMapper.modelMapperConfig(true).map(testDao.getTest(id), TestView.class);
     }
 
     /**
@@ -57,7 +63,7 @@ public class TestServiceImpl implements TestService {
             }
             return criteriaBuilder.and(temp.toArray(new Predicate[temp.size()]));
         }, pageable);
-        List<TestView> list = TestMapper.modelMapperConfig(true)
+        List<TestView> list = testMapper.modelMapperConfig(true)
                 .map(page.getContent(), new TypeToken<List<TestView>>() {
                 }.getType());
         return new PageImpl<>(list, pageable, page.getTotalElements());
@@ -70,7 +76,7 @@ public class TestServiceImpl implements TestService {
      */
     @Override
     public void save(TestView testView) {
-        testDao.save(TestMapper.modelMapperConfig(false).map(testView, Test.class));
+        testDao.save(testMapper.modelMapperConfig(false).map(testView, Test.class));
     }
 
     /**
