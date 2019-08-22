@@ -3,7 +3,12 @@ package com.shoestp.test.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.shoestp.test.dao.impl.TestDaoImpl;
 import com.shoestp.test.entity.Test;
 
 /**
@@ -12,11 +17,14 @@ import com.shoestp.test.entity.Test;
  * @author lingjian
  * @since 2019-07-30 16:28:39
  */
-public interface TestDao extends JpaRepository<Test,Integer>,JpaSpecificationExecutor<Test>, PagingAndSortingRepository<Test,Integer> {
+public interface TestDao extends JpaRepository<Test,Integer>,JpaSpecificationExecutor<Test>,
+        PagingAndSortingRepository<Test,Integer> {
     /**
      * 通过id查询Test单个对象
      * @param id id
      * @return Test实体类
      */
     Test getTest(Integer id);
+
+
 }

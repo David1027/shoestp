@@ -3,6 +3,7 @@ package com.shoestp.test.service.impl;
 
 import com.shoestp.common.enums.ResultEnum;
 import com.shoestp.common.exception.WebMessageException;
+import com.shoestp.common.pojo.PageView;
 import com.shoestp.common.pojo.Result;
 import com.shoestp.test.dao.TestDao;
 import com.shoestp.test.entity.Test;
@@ -54,7 +55,7 @@ public class TestServiceImpl implements TestService {
      * @return 对象列表
      */
     @Override
-    public Page<TestView> listByPage(String condition, Pageable pageable) {
+    public PageView<TestView> listByPage(String condition, Pageable pageable) {
         Page<Test> page = testDao.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> temp = new ArrayList<>();
             if (condition != null) {
@@ -66,7 +67,8 @@ public class TestServiceImpl implements TestService {
         List<TestView> list = testMapper.modelMapperConfig(true)
                 .map(page.getContent(), new TypeToken<List<TestView>>() {
                 }.getType());
-        return new PageImpl<>(list, pageable, page.getTotalElements());
+
+        return PageView.of(page.getTotalElements(),list);
     }
 
     /**

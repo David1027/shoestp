@@ -1,6 +1,7 @@
 package com.shoestp.test.service;
 
 
+import com.shoestp.common.pojo.PageView;
 import com.shoestp.test.vo.TestView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +28,7 @@ public interface TestService {
      * @param condition 查询条件
      * @return 对象列表
      */
-    Page<TestView> listByPage(String condition, Pageable pageable);
+    PageView<TestView> listByPage(String condition, Pageable pageable);
 
     /**
      * 新增数据/编辑数据
