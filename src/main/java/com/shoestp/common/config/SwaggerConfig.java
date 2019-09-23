@@ -25,51 +25,50 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    /**
-     * 配置docket以配置swagger具体参数 Docket
-     * swagger-ui界面信息 apiInfo(apiInfo())
-     * 扫描范围 apis(RequestHandlerSelectors.basePackage("com.shoestp.demo"))
-     * 正则过滤 paths(PathSelectors.any())
-     * 忽略参数 ignoredParameterTypes(HttpSession.class)
-     * 控制swagger-ui界面展示 enable(isEnable) Boolean
-     *
-     * @return
-     */
-    @Bean
-    public Docket docket(Environment environment) {
-//        Parameter token = new ParameterBuilder().name("token")
-//                .description("用户登陆令牌")
-//                .parameterType("header")
-//                .modelRef(new ModelRef("String"))
-//                .required(true)
-//                .build();
-//        List<Parameter> parameters = new ArrayList<>();
-//        parameters.add(token);
-        Profiles profiles = Profiles.of("dev", "test");
-        boolean isEnable = environment.acceptsProfiles(profiles);
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.shoestp"))
-                .paths(PathSelectors.any()).build()
-                .ignoredParameterTypes(HttpSession.class)
-                .enable(isEnable);
-    }
+  /**
+   * 配置docket以配置swagger具体参数 Docket swagger-ui界面信息 apiInfo(apiInfo()) 扫描范围
+   * apis(RequestHandlerSelectors.basePackage("com.shoestp.demo")) 正则过滤 paths(PathSelectors.any())
+   * 忽略参数 ignoredParameterTypes(HttpSession.class) 控制swagger-ui界面展示 enable(isEnable) Boolean
+   *
+   * @return
+   */
+  @Bean
+  public Docket docket(Environment environment) {
+    //        Parameter token = new ParameterBuilder().name("token")
+    //                .description("用户登陆令牌")
+    //                .parameterType("header")
+    //                .modelRef(new ModelRef("String"))
+    //                .required(true)
+    //                .build();
+    //        List<Parameter> parameters = new ArrayList<>();
+    //        parameters.add(token);
+    Profiles profiles = Profiles.of("dev", "test");
+    boolean isEnable = environment.acceptsProfiles(profiles);
+    return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo())
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.shoestp"))
+        .paths(PathSelectors.any())
+        .build()
+        .ignoredParameterTypes(HttpSession.class)
+        .enable(isEnable);
+  }
 
-
-    /**
-     * swagger界面基础信息配置
-     *
-     * @return ApiInfo
-     */
-    private ApiInfo apiInfo() {
-        Contact contact = new Contact("David", "david.com", "123@qq.com");
-        return new ApiInfo("测试用swagger接口文档",
-                "在测试项目中引入swagger的api接口文档",
-                "v1.0",
-                "http://localhost:8080",
-                contact,
-                "",
-                "",
-                new ArrayList<>());
-    }
+  /**
+   * swagger界面基础信息配置
+   *
+   * @return ApiInfo
+   */
+  private ApiInfo apiInfo() {
+    Contact contact = new Contact("David", "david.com", "123@qq.com");
+    return new ApiInfo(
+        "测试用swagger接口文档",
+        "在测试项目中引入swagger的api接口文档",
+        "v1.0",
+        "http://localhost:8080",
+        contact,
+        "",
+        "",
+        new ArrayList<>());
+  }
 }

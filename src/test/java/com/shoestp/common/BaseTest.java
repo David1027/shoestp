@@ -19,14 +19,13 @@ import org.springframework.test.web.servlet.MvcResult;
 @AutoConfigureMockMvc
 public class BaseTest {
 
-    @Autowired
-    public MockMvc mockMvc;
+  @Autowired public MockMvc mockMvc;
 
-    public void printResult(MvcResult mvcResult) throws Exception {
-        MockHttpServletResponse response = mvcResult.getResponse();
-        //得到返回码
-        System.err.println("status---->" + response.getStatus());
-        //得到返回结果
-        System.err.println("content---->" + response.getContentAsString());
-    }
+  public void printResult(MvcResult mvcResult) throws Exception {
+    MockHttpServletResponse response = mvcResult.getResponse();
+    // 得到返回码
+    System.err.println("status---->" + response.getStatus());
+    // 得到返回结果
+    System.err.println("content---->" + response.getContentAsString());
+  }
 }
