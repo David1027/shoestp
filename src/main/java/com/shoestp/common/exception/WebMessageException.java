@@ -1,7 +1,5 @@
 package com.shoestp.common.exception;
 
-import lombok.AllArgsConstructor;
-
 /**
  * @description: 异常类
  * @author: lingjian

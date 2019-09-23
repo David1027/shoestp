@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author: lingjian
  * @create: 2019/7/30 15:02
  */
-public abstract class BaseRepository {
+public abstract class BaseDao {
 
     @Autowired
     protected EntityManager entityManager;

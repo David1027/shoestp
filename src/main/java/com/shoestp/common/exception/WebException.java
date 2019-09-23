@@ -1,12 +1,8 @@
 package com.shoestp.common.exception;
 
 import com.shoestp.common.enums.ResultEnum;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMsg;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 
 /**
  * @description: 自定义异常类
